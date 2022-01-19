@@ -1,0 +1,18 @@
+english:
+F1 score for validation is 0.32
+Accuracy score for validation is 0.78
+dutch:
+F1 score for validation is 0.3249581239530988
+Accuracy score for validation is 0.8075453677172875
+french:
+F1 score for validation is 0.32
+Accuracy score for validation is 0.7320916905444126
+italian:
+F1 score for validation is 0.2504230118443317
+Accuracy score for validation is 0.788443170964661
+german:
+F1 score for validation is 0.2436260623229462
+Accuracy score for validation is 0.7449856733524355
+spanish:
+F1 score for validation is 0.2627599243856333
+Accuracy score for validation is 0.6275071633237822

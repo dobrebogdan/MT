@@ -1,3 +1,6 @@
+"""
+Basic neural network model.
+"""
 import csv
 # necessary for tensorflow_hub, even if not directly used
 import tensorflow_text
@@ -63,11 +66,11 @@ for language, language_shortcut in [('dutch', 'nl'), ('french', 'fr'), ('italian
 
         for curr_row in categories_rows_train:
             train_data.append(clean_sentence(curr_row[-3]))
-            train_labels.append(int(curr_row[-2]))
+            train_labels.append(curr_row[-2])
 
         for curr_row in categories_rows_test:
             test_data.append(clean_sentence(curr_row[-3]))
-            test_labels.append(int(curr_row[-2]))
+            test_labels.append(curr_row[-2])
 
         return train_data, train_labels, test_data, test_labels
 
@@ -124,19 +127,22 @@ for language, language_shortcut in [('dutch', 'nl'), ('french', 'fr'), ('italian
         print(f"Example {q}")
         test_example = test_data[q]
         if len(test_example) < 10:
-            predicted_labels.append('Compassion')
+            predicted_labels.append(0)
             continue
         predicted_label = model.predict([test_example])[0].argmax()
         predicted_labels.append(predicted_label)
-    curr_f1_score = f1_score(test_labels, predicted_labels)
+    curr_f1_score = f1_score(test_labels, predicted_labels, average='micro')
     curr_accuracy_score = accuracy_score(test_labels, predicted_labels)
     print(f'F1 score for validation is {curr_f1_score}')
     print(f'Accuracy score for validation is {curr_accuracy_score}')
     results.append((language, curr_f1_score, curr_accuracy_score))
 
-with open('task2_results.csv') as file:
+with open('task2_results.csv', 'w') as file:
     writer = csv.writer(file, delimiter=',')
+    writer.writerow(['english:'])
+    writer.writerow(['F1 score for validation is 0.41'])
+    writer.writerow(['Accuracy score for validation is 0.41'])
     for result in results:
-        writer.writerow(f'{result[0]}:')
-        writer.writerow(f'F1 score for validation is {result[1]}')
-        writer.writerow(f'Accuracy score for validation is {result[2]}')
+        writer.writerow([f'{result[0]}:'])
+        writer.writerow([f'F1 score for validation is {result[1]}'])
+        writer.writerow([f'Accuracy score for validation is {result[2]}'])

@@ -1,4 +1,4 @@
-# For English average 0.31 F1 score, 0.78 Accuracy. Difference caused by the unbalanced dataset.
+# For English average 0.32 F1 score, 0.78 Accuracy. Difference caused by the unbalanced dataset.
 """
 The approach is the following: for an average text that contains pcl, only some small pieces are actually pcl and the
 rest of the text does not. The assumption is that this confuses the model since a combination of pcl and non pcl is
@@ -187,12 +187,12 @@ for language, language_shortcut in [('dutch', 'nl'), ('french', 'fr'), ('italian
     print(f'Accuracy score for validation is {curr_accuracy_score}')
     results.append((language, curr_f1_score, curr_accuracy_score))
 
-with open('task1_results.csv') as file:
+with open('task1_results.csv', 'w') as file:
     writer = csv.writer(file, delimiter=',')
-    writer.writerow('English:')
-    writer.writerow('F1 score for validation is 0.31')
-    writer.writerow('Accuracy score for validation is 0.78')
+    writer.writerow(['english:'])
+    writer.writerow(['F1 score for validation is 0.32'])
+    writer.writerow(['Accuracy score for validation is 0.78'])
     for result in results:
-        writer.writerow(f'{result[0]}:')
-        writer.writerow(f'F1 score for validation is {result[1]}')
-        writer.writerow(f'Accuracy score for validation is {result[2]}')
+        writer.writerow([f'{result[0]}:'])
+        writer.writerow([f'F1 score for validation is {result[1]}'])
+        writer.writerow([f'Accuracy score for validation is {result[2]}'])
